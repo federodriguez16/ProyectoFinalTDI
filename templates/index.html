@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Procesamiento Digital de Imagenes</title>
+    <link rel="stylesheet" href="static/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js" integrity="sha512-9KkIqdfN7ipEW6B6k+Aq20PV31bjODg4AA52W+tYtAE0jE0kMx49bjJ3FgvS56wzmyfMUHbQ4Km2b7l9+Y/+Eg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css" integrity="sha512-hvNR0F/e2J7zPPfLC9auFe3/SE0yG4aJCOd/qxew74NN7eyiSKjr7xJJMu1Jy2wf7FXITpWS1E/RY8yzuXN7VA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  </head>
+  <body>
+
+    <nav>
+      <img src="static/img/escudo_ing2.png" alt="logo-empresa" />
+      <span>Procesamiento Digital de Imagenes</span>
+    </nav>
+
+    <div id="main">
+      <form method=post enctype=multipart/form-data>
+        <div id="load-image">
+          <div class="preview-img">
+            <img id="image" alt="" src="static/img/image-placeholder.svg">
+          </div>
+          <div class="upload-btn-wrapper">
+            <div class="choose-btn">Elija una Imagen</div>
+            <input type="file" name="file" required class="help" hidden/>
+          </div>
+        </div>
+        <div id="opciones">
+            <span>Coloque las Funcionalidades a utilizar</span>
+            <div id="botones">
+              <span style="color:#ffffff;" class="button-18" id="crop">Crop</span>
+              <div class="contenido-opciones" id="crop-content" style="display: none;">
+                <div class="coordenadas">
+                  <div>
+                    <label for="x">x:</label>
+                    <input type="text" id="x" name="x" minlength="1" maxlength="4" size="10" />
+                    <label for="x">px</label>
+                  </div>
+                  <div>
+                    <label for="y">y:</label>
+                    <input type="text" id="y" name="y" minlength="1" maxlength="4" size="10" />
+                    <label for="y">px</label>
+                  </div>
+                  <div>
+                    <label for="ancho">Ancho:</label>
+                    <input type="text" id="ancho" name="ancho" minlength="1" maxlength="4" size="10" />
+                    <label for="ancho">px</label>
+                  </div>
+                  <div>
+                    <label for="alto">Alto:</label>
+                    <input type="text" id="alto" name="alto" minlength="1" maxlength="4" size="10" />
+                    <label for="alto">px</label>
+                  </div>
+                </div>
+              </div>
+              <span style="color:#ffffff;" class="button-18" id="scale">Scale</span>
+              <div class="contenido-opciones" id="scale-content" style="display: none;">
+                <div class="Dimensiones">
+                  <label for="Dimensiones">Indique el Porcentaje de escalamiento:</label>
+                  <input type="text" id="dimensiones" name="scale" minlength="1" maxlength="4" size="10" />
+                  <label for="Dimensiones">%</label>
+                </div>
+              </div>
+              <span style="color:#ffffff;" class="button-18" id="deblur">Deblur</span>
+            </div>
+        </div>
+        <div id="guardar">
+          <input type="submit" value="Guardar Imagen" class="choose-btn" />
+        </div>
+      </form>
+    </div>
+
+    <script src="static/index.js"></script>
+
+    <script>
+    </script>
+    
+  </body>
+  
+</html>
