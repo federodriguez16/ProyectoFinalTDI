@@ -42,6 +42,7 @@ document.getElementById("crop").addEventListener("click", function() {
     
 });
 
+/* Deteccion boton Scale + Reinicio de valor */
 
 document.getElementById("scale").addEventListener("click", function() {
     var div = document.getElementById("scale-content");
@@ -52,6 +53,8 @@ document.getElementById("scale").addEventListener("click", function() {
         document.getElementById('dimensiones').value = ''
     }
 });
+
+/* Deteccion boton deblur + Reinicio de valor */
 
 document.getElementById("deblur").addEventListener("click", function() {
     var input = document.getElementById("deblur-value");

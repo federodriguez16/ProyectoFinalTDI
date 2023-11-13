@@ -1,6 +1,5 @@
 import cv2
 from PIL import Image
-import requests
 from matplotlib.pyplot import imshow, figure, subplot, show
 
 
