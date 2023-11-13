@@ -2,6 +2,7 @@ from flask import Flask, render_template, flash, request, redirect, url_for
 import os
 from werkzeug.utils import secure_filename
 from markupsafe import escape
+from procesamiento import crop
 
 UPLOAD_FOLDER = 'static/uploads/'
 
@@ -39,9 +40,9 @@ def upload_file():
             filename = secure_filename(file.filename)
             print(filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            crop(filename, int(float(request.form['x'])), int(float(request.form['y'])), int(float(
+                request.form['ancho'])), int(float(request.form['alto'])))
             return render_template('index.html', filename=filename)
-
-            # return redirect(url_for('index.html', filename=filename))
 
 
 @app.route('/user/<username>')

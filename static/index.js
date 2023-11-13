@@ -1,6 +1,7 @@
 const fileInput = document.querySelector(".help")
 previewImg = document.querySelector(".preview-img img");
 chooseImgBtn = document.querySelector(".choose-btn")
+let blur = 0;
 
 /* Previsualizacion de Archivo */
 const loadImage = () => {
@@ -26,13 +27,17 @@ document.getElementById("crop").addEventListener("click", function() {
         scalable: false,
         crop(event) {
             document.getElementById('x').value = event.detail.x.toFixed(2);
-            document.getElementById('y').value = event.detail.x.toFixed(2);
+            document.getElementById('y').value = event.detail.y.toFixed(2);
             document.getElementById('ancho').value = event.detail.width.toFixed(2);
             document.getElementById('alto').value = event.detail.height.toFixed(2);
         },
         });
     } else {
         div.style.display = "none";
+        document.getElementById('x').value = ''
+        document.getElementById('y').value = ''
+        document.getElementById('ancho').value = ''
+        document.getElementById('alto').value = ''
     }
     
 });
@@ -44,7 +49,19 @@ document.getElementById("scale").addEventListener("click", function() {
         div.style.display = "block";
     } else {
         div.style.display = "none";
+        document.getElementById('dimensiones').value = ''
     }
+});
+
+document.getElementById("deblur").addEventListener("click", function() {
+    var input = document.getElementById("deblur-value");
+    if (input.value === ''){
+        input.value = 1;
+    } else {
+        input.value = '';
+    }
+
+
 });
 
 /* Funcionalidad Boton: Cambio de Clase */
