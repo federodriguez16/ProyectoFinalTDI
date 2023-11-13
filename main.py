@@ -1,10 +1,13 @@
 from flask import Flask, render_template, flash, request, redirect, url_for
 import os
+import shutil
 from werkzeug.utils import secure_filename
 from markupsafe import escape
 from procesamiento import crop, scale
 
 UPLOAD_FOLDER = 'static/uploads/'
+
+id = 1
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -41,27 +44,39 @@ def upload_file():
 
         # En caso de que se haya introducido una imagen de manera correcta se guarda la imagen
         if file and allowed_file(file.filename):
+            global id
             filename = secure_filename(file.filename)
-            print(filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
+            ext = filename.split('.')
+            nombre = f"{id}.{ext[1]}"
+            shutil.copy(f"static/uploads/{filename}",
+                        f"static/processing/{nombre}")
+            id += 1
             # Opcion 1 -- crop
             if request.form['x'] != '':
                 try:
-                    crop(filename, int(float(request.form['x'])), int(float(request.form['y'])), int(
+                    crop(nombre, int(float(request.form['x'])), int(float(request.form['y'])), int(
                         float(request.form['ancho'])), int(float(request.form['alto'])))
                 except:
                     print("Hubo un error con el crop")
 
             # Opcion 2 -- scale
             if request.form['scale'] != '':
-                scale(filename, int(float(request.form['scale'])))
+                scale(nombre, int(float(request.form['scale'])))
 
             # Opcion 3 -- deblur
             if request.form['porcentaje'] == '1':
                 print("deblur activado")
 
-            return render_template('index.html', filename=filename)
+            os.rename(f"static/processing/{nombre}",
+                      f"static/downloads/{nombre}")
+            return redirect(url_for('descargar'))
+
+
+@app.route('/descarga.html')
+def descargar():
+    return render_template('descarga.html')
 
 
 @app.route('/user/<username>')
