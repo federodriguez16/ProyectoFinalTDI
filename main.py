@@ -48,6 +48,7 @@ def upload_file():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
+        # Dejamos la imagen original y se trabaja con una copia
             ext = filename.split('.')
             nombre = f"{id}.{ext[1]}"
             shutil.copy(f"static/uploads/{filename}",
@@ -69,6 +70,7 @@ def upload_file():
             if request.form['porcentaje'] == '1':
                 print("deblur activado")
 
+            # Movemos la imagen del sector de procesamiento para que el usuario pueda descargarla
             os.rename(f"static/processing/{nombre}",
                       f"static/downloads/{nombre}")
             return redirect(url_for('descargar'))
