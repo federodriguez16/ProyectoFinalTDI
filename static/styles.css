@@ -3,6 +3,14 @@
     margin: 0;
     box-sizing: border-box;
 }
+
+h1 {
+    color:#303030;
+    font-family: 'Open Sans', sans-serif;
+    margin-top: 30px;
+    text-align: center;
+}
+
 body {
     background-color:  	#F5F5F5;
 }
@@ -33,7 +41,7 @@ nav span {
     width: 55%;
     text-align: center;
     margin: 50px 0 300px 0;
-    padding: 0 10%;
+    padding: 0 5%;
     float: left;
 }
 
@@ -42,7 +50,7 @@ nav span {
     border: #A9A9A9 5px solid;
     border-radius: 5px;
     text-align: center;
-    
+    background-color: #f2f2f2;
 }
 
 #image{

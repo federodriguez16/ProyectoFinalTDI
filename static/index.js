@@ -2,6 +2,8 @@ const fileInput = document.querySelector(".help")
 previewImg = document.querySelector(".preview-img img");
 chooseImgBtn = document.querySelector(".choose-btn")
 let blur = 0;
+let crooper = null;
+
 
 /* Previsualizacion de Archivo */
 const loadImage = () => {
@@ -20,11 +22,12 @@ document.getElementById("crop").addEventListener("click", function() {
     if (div.style.display === "none") {
         div.style.display = "block";
         const image = document.getElementById('image');
-        const cropper = new Cropper(image, {
+        cropper = new Cropper(image, {
         aspectRatio: 0,
         viewMode: 1,
         dragMode: 1,
         scalable: false,
+        responsive: false,
         crop(event) {
             document.getElementById('x').value = event.detail.x.toFixed(2);
             document.getElementById('y').value = event.detail.y.toFixed(2);
