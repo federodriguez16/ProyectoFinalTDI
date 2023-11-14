@@ -11,6 +11,11 @@ h1 {
     text-align: center;
 }
 
+a {
+    text-decoration: none;
+    font-family: 'Open Sans', sans-serif;
+}
+
 #image-ready{
     margin: 0 auto;
     display: flex;

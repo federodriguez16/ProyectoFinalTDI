@@ -1,4 +1,4 @@
-from flask import Flask, render_template, flash, request, redirect, url_for
+from flask import Flask, render_template, flash, request, redirect, url_for, send_file
 import os
 import shutil
 from werkzeug.utils import secure_filename
@@ -79,9 +79,15 @@ def upload_file():
             return redirect(url_for('descargar'))
 
 
-@app.route('/descarga.html')
+@app.route('/descarga')
 def descargar():
     return render_template('descarga.html', archivo=str(id-1), exten=extension)
+
+
+@app.route('/download')
+def download():
+    path = f'static/downloads/{str(id-1)}.{extension}'
+    return send_file(path, as_attachment=True)
 
 
 @app.route("/test")
