@@ -7,10 +7,20 @@
 h1 {
     color:#303030;
     font-family: 'Open Sans', sans-serif;
-    margin-top: 30px;
+    margin: 30px 0 ;
     text-align: center;
 }
 
+#image-ready{
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+#image-save {
+    text-align: center;
+    margin: 30px auto;
+}
 body {
     background-color:  	#F5F5F5;
 }

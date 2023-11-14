@@ -8,6 +8,7 @@ from procesamiento import crop, scale
 UPLOAD_FOLDER = 'static/uploads/'
 
 id = 1
+extension = ''
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -45,11 +46,13 @@ def upload_file():
         # En caso de que se haya introducido una imagen de manera correcta se guarda la imagen
         if file and allowed_file(file.filename):
             global id
+            global extension
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
         # Dejamos la imagen original y se trabaja con una copia
             ext = filename.split('.')
+            extension = ext[1]
             nombre = f"{id}.{ext[1]}"
             shutil.copy(f"static/uploads/{filename}",
                         f"static/processing/{nombre}")
@@ -78,13 +81,7 @@ def upload_file():
 
 @app.route('/descarga.html')
 def descargar():
-    return render_template('descarga.html')
-
-
-@app.route('/user/<username>')
-def show_user_profile(username):
-    # show the user profile for that user
-    return f'User {escape(username)}'
+    return render_template('descarga.html', archivo=str(id-1), exten=extension)
 
 
 @app.route("/test")

@@ -41,6 +41,7 @@ document.getElementById("crop").addEventListener("click", function() {
         document.getElementById('y').value = ''
         document.getElementById('ancho').value = ''
         document.getElementById('alto').value = ''
+        cropper.destroy()
     }
     
 });
