@@ -3,12 +3,15 @@ import os
 import shutil
 from werkzeug.utils import secure_filename
 from markupsafe import escape
-from procesamiento import crop, scale
+from procesamiento import crop, scale, objectDetector
 
 UPLOAD_FOLDER = 'static/uploads/'
 
 id = 1
 extension = ''
+ayuda = []
+categoria = []
+counts = 0
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -69,9 +72,26 @@ def upload_file():
             if request.form['scale'] != '':
                 scale(nombre, int(float(request.form['scale'])))
 
-            # Opcion 3 -- deblur
-            if request.form['porcentaje'] == '1':
-                print("deblur activado")
+            # Opcion 3 -- object detector
+            if request.form['object-detector'] == '1':
+                global ayuda
+                global categoria
+                global counts
+                counts = 0
+                ayuda = []
+                categoria = []
+                try:
+                    predicciones = objectDetector(nombre)
+                    print(predicciones)
+                    for i in predicciones:
+                        print(type(i))
+                        ayuda.append(
+                            f"class=cuadros style=position:absolute;top:{i['y_min']}px;left:{i['x_min']}px;width:{i['x_max']-i['x_min']}px;height:{i['y_max']-i['y_min']}px")
+                        print(ayuda)
+                        categoria.append(i['label'])
+                    counts = len(ayuda)
+                except:
+                    print("error con el detector")
 
             # Movemos la imagen del sector de procesamiento para que el usuario pueda descargarla
             os.rename(f"static/processing/{nombre}",
@@ -81,7 +101,7 @@ def upload_file():
 
 @app.route('/descarga')
 def descargar():
-    return render_template('descarga.html', archivo=str(id-1), exten=extension)
+    return render_template('descarga.html', archivo=str(id-1), exten=extension, texto=ayuda, cat=categoria, counts=counts)
 
 
 @app.route('/download')

@@ -17,16 +17,23 @@
   <body>
     <nav>
       <img src="static/img/escudo_ing2.png" alt="logo-empresa" />
-      <span>Procesamiento Digital de Imagenes</span>
+      <a href="/">Procesamiento Digital de Imagenes</a>
     </nav>
 
     <h1>Su Archivo ha sido procesado correctamente y esta listo para descargar</h1>
     
-    <img id="image-ready" src="static/downloads/{{ archivo }}.{{exten}}" />
-
+    <div class="ayuda">
+      <div class="image-wrapper">
+        {% for text in range(counts) %}
+        <div {{ texto[text] }}><span class="category">{{ cat[text] }}</span></div>
+        {% endfor %}
+        <img id="image-ready" src="static/downloads/{{ archivo }}.{{exten}}" />
+      </div>
+    </div>
     <div id="image-save">
       <a class="choose-btn" href="{{url_for('download')}}">Guardar Imagen</a>
     </div>
+
     
     
     <script src="static/index.js"></script>

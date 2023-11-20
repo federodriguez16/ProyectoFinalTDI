@@ -1,6 +1,5 @@
 import cv2
 import requests
-from PIL import Image
 from matplotlib.pyplot import imshow, figure, subplot, show
 
 
@@ -29,5 +28,4 @@ def objectDetector(img):
     print(img)
     image_data = open(f"static/processing/{img}", "rb").read()
     response = requests.post(URL, files={"image": image_data}).json()
-    print(response['message'])
-    return 0
+    return response['predictions']

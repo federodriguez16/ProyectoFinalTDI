@@ -16,8 +16,37 @@ a {
     font-family: 'Open Sans', sans-serif;
 }
 
+.cuadros {
+    background-color:#333;
+    opacity: 0.3;
+    border: #A9A9A9 3px solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cuadros:hover{
+    opacity: 0.7;
+}
+
+.category {
+    font-size: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    opacity: 0.3;
+}
+
 #image-ready{
     margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+.image-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.ayuda {
     display: flex;
     justify-content: center;
 }
@@ -41,11 +70,12 @@ nav img {
 
 }
 
-nav span {
+nav a{
     font-size: 25px;
     font-family: 'Courier New', Courier, monospace;
     margin-left: 10px;
     color: #333;
+    text-decoration: none;
 }
 
 #main {
@@ -54,18 +84,24 @@ nav span {
 
 #load-image {
     width: 55%;
-    text-align: center;
-    margin: 50px 0 300px 0;
-    padding: 0 5%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 30px;
+    justify-content: center;
+    align-items: center;
+    margin: 50px auto 300px auto;
     float: left;
 }
 
 .preview-img {
     overflow: hidden;
+    grid-row: 1;
     border: #A9A9A9 5px solid;
     border-radius: 5px;
-    text-align: center;
     background-color: #f2f2f2;
+    width: auto;
+    margin: 0 auto;
+
 }
 
 #image{
@@ -87,10 +123,10 @@ nav span {
     float: left;
 }
 
-#opciones span {
-    font-size: 25px;
-    font-family: 'Open Sans', sans-serif;
-    color: #333;
+#instru {
+        font-size: 25px;
+        font-family: 'Open Sans', sans-serif;
+        color: #333;
 }
 
 #botones {
@@ -126,8 +162,11 @@ input {
 
 .upload-btn-wrapper {
     position: relative;
+    grid-row: 2;
     overflow: hidden;
-    margin-top: 50px;
+    text-align: center;
+    margin: 0 auto;
+    width: 40%;
   }
   
 #upload-btn-wrapper .choose-btn {
@@ -158,11 +197,11 @@ input {
   background-color: #0A66C2;
   border: 0;
   border-radius: 100px;
-  color: #ffffff;
+  font-size: 25px;
+  font-family: 'Open Sans', sans-serif;
+  color: #333;
   cursor: pointer;
   display: inline-flex;
-  font-family: -apple-system, system-ui, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
-  font-size: 24px;
   font-weight: 600;
   justify-content: center;
   line-height: 20px;
@@ -200,4 +239,11 @@ input {
 
 div span {
     color:#ffffff;
+}
+
+#aclaracion {
+    display: block;
+    color:#424242;
+    font-size: 12px;
+    margin-top: 6px;
 }

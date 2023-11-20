@@ -61,11 +61,11 @@ document.getElementById("scale").addEventListener("click", function() {
 /* Deteccion boton deblur + Reinicio de valor */
 
 document.getElementById("deblur").addEventListener("click", function() {
-    var input = document.getElementById("deblur-value");
-    if (input.value === ''){
-        input.value = 1;
+    var div = document.getElementById("object-detector");
+    if (div.value === "") {
+        div.value = "1";
     } else {
-        input.value = '';
+        div.value = "";
     }
 
 

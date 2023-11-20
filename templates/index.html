@@ -17,7 +17,7 @@
 
     <nav>
       <img src="static/img/escudo_ing2.png" alt="logo-empresa" />
-      <span>Procesamiento Digital de Imagenes</span>
+      <a href="/">Procesamiento Digital de Imagenes</a>
     </nav>
 
     <div id="main">
@@ -32,7 +32,7 @@
           </div>
         </div>
         <div id="opciones">
-            <span>Coloque las Funcionalidades a utilizar</span>
+            <span id="instru">Coloque las Funcionalidades a utilizar</span>
             <div id="botones">
               <span style="color:#ffffff;" class="button-18" id="crop">Crop</span>
               <div class="contenido-opciones" id="crop-content" style="display: none;">
@@ -58,6 +58,7 @@
                     <label for="alto">px</label>
                   </div>
                 </div>
+                <span id="aclaracion" style="font-size:16px;">Recortara la imagen en funcion del cuadro</span>
               </div>
               <span style="color:#ffffff;" class="button-18" id="scale">Scale</span>
               <div class="contenido-opciones" id="scale-content" style="display: none;">
@@ -65,10 +66,15 @@
                   <label for="Dimensiones">Indique el Porcentaje de escalamiento:</label>
                   <input type="text" id="dimensiones" name="scale" minlength="1" maxlength="4" size="10" />
                   <label for="Dimensiones">%</label>
+                  <span id="aclaracion">Tener en cuenta que 100% es el formato original</span>
                 </div>
               </div>
-              <span style="color:#ffffff;" class="button-18" id="deblur">Deblur</span>
-              <input type="text" id="deblur-value" name="porcentaje" minlength="1" maxlength="4" size="10" hidden />
+              <span style="color:#ffffff;" class="button-18" id="deblur">Detector de Objetos</span>
+              <div class="contenido-opciones" id="object-content" style="display: none;">
+                <span id="aclaracion" style="font-size:16px;">Se Mostraran en pantalla los objetos identicados a partir de Inteligencia Artificial</span>
+                <input type="text" id="object-detector" name="object-detector" minlength="1" maxlength="4" size="10" hidden/>              
+              </div>
+              
             </div>
         </div>
         <div id="guardar">
