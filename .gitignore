@@ -1,7 +1,7 @@
 /__pycache__
 
-/static/downloads/*
+static/downloads/*
 
-/static/uploads/*
+static/uploads/*
 
-/templates/test.html
+templates/test.html
