@@ -1,1 +1,7 @@
 /__pycache__
+
+/static/downloads/*
+
+/static/uploads/*
+
+/templates/test.html
