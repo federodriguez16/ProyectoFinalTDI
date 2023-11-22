@@ -5,7 +5,8 @@ from werkzeug.utils import secure_filename
 from markupsafe import escape
 from procesamiento import crop, scale, objectDetector
 
-UPLOAD_FOLDER = 'static/uploads/'
+
+# Variables auxiliares
 
 id = 1
 extension = ''
@@ -13,20 +14,32 @@ ayuda = []
 categoria = []
 counts = 0
 
+# Configuracion Flask
+
+UPLOAD_FOLDER = 'static/uploads/'
+
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.secret_key = 'boca el mas grande de argentina'
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
+# Funciones Auxiliares
+
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+# Funciones Aplicacion
+
+# Pagina Principal
+
 
 @app.route("/")
-def hello_world():
+def index():
     return render_template('index.html')
+
+# Carga y procesamiento de imagenes
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -60,6 +73,13 @@ def upload_file():
             shutil.copy(f"static/uploads/{filename}",
                         f"static/processing/{nombre}")
             id += 1
+
+            global ayuda
+            global categoria
+            global counts
+            counts = 0
+            ayuda = []
+            categoria = []
             # Opcion 1 -- crop
             if request.form['x'] != '':
                 try:
@@ -74,12 +94,7 @@ def upload_file():
 
             # Opcion 3 -- object detector
             if request.form['object-detector'] == '1':
-                global ayuda
-                global categoria
-                global counts
-                counts = 0
-                ayuda = []
-                categoria = []
+
                 try:
                     predicciones = objectDetector(nombre)
                     print(predicciones)
@@ -99,15 +114,20 @@ def upload_file():
             return redirect(url_for('descargar'))
 
 
+# Pagina de descarga de imagen
 @app.route('/descarga')
 def descargar():
     return render_template('descarga.html', archivo=str(id-1), exten=extension, texto=ayuda, cat=categoria, counts=counts)
+
+# Descarga de la imagen
 
 
 @app.route('/download')
 def download():
     path = f'static/downloads/{str(id-1)}.{extension}'
     return send_file(path, as_attachment=True)
+
+# Pagina de prueba
 
 
 @app.route("/test")

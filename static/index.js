@@ -58,14 +58,16 @@ document.getElementById("scale").addEventListener("click", function() {
     }
 });
 
-/* Deteccion boton deblur + Reinicio de valor */
+/* Deteccion boton detector + Reinicio de valor */
 
 document.getElementById("deblur").addEventListener("click", function() {
-    var div = document.getElementById("object-detector");
-    if (div.value === "") {
-        div.value = "1";
+    var div = document.getElementById("object-content");
+    if (div.style.display === "none") {
+        document.getElementById("object-detector").value = "1";
+        div.style.display = "block";
     } else {
-        div.value = "";
+        document.getElementById("object-detector").value = "";
+        div.style.display = "none";
     }
 
 
