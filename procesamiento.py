@@ -27,5 +27,6 @@ def objectDetector(img):
 
     print(img)
     image_data = open(f"static/processing/{img}", "rb").read()
-    response = requests.post(URL, files={"image": image_data}).json()
+    response = requests.post(URL, files={"image": image_data}, data={
+                             "min_confidence": 0.5}).json()
     return response['predictions']

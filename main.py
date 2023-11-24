@@ -78,8 +78,10 @@ def upload_file():
             global categoria
             global counts
             counts = 0
+            l = 1
             ayuda = []
             categoria = []
+            lines = ["id,label,y_min,x_min,y_max,x_max\n"]
             # Opcion 1 -- crop
             if request.form['x'] != '':
                 try:
@@ -104,6 +106,9 @@ def upload_file():
                             f"class=cuadros style=position:absolute;top:{i['y_min']}px;left:{i['x_min']}px;width:{i['x_max']-i['x_min']}px;height:{i['y_max']-i['y_min']}px")
                         print(ayuda)
                         categoria.append(i['label'])
+                        lines.append(
+                            f"{l},{i['label']},{i['y_min']},{i['x_min']},{i['y_max']},{i['x_max']}\n")
+                        l += 1
                     counts = len(ayuda)
                 except:
                     print("error con el detector")
@@ -111,6 +116,18 @@ def upload_file():
             # Movemos la imagen del sector de procesamiento para que el usuario pueda descargarla
             os.rename(f"static/processing/{nombre}",
                       f"static/downloads/{nombre}")
+            print(ayuda)
+            print(categoria)
+            print(counts)
+
+            try:
+                os.remove(f"static/downloads/{id-1}-objetos.csv")
+            except:
+                print("no existe el archivo")
+
+            f = open(f"static/downloads/{id-1}-objetos.csv", "a")
+            f.writelines(lines)
+            f.close()
             return redirect(url_for('descargar'))
 
 
@@ -125,6 +142,12 @@ def descargar():
 @app.route('/download')
 def download():
     path = f'static/downloads/{str(id-1)}.{extension}'
+    return send_file(path, as_attachment=True)
+
+
+@app.route('/download-metadata')
+def downloadMetadata():
+    path = f'static/downloads/{id-1}-objetos.csv'
     return send_file(path, as_attachment=True)
 
 # Pagina de prueba

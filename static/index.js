@@ -10,6 +10,12 @@ const loadImage = () => {
     let file = fileInput.files[0];
     if(!file) return;
     previewImg.src = URL.createObjectURL(file)
+    setTimeout(() => {
+        let myImg = document.querySelector("#image");
+        let realWidth = myImg.naturalWidth;
+        let realHeight = myImg.naturalHeight;
+        document.getElementById("stats").textContent= "Dimensiones Actuales: " + realWidth + "x" + realHeight;
+      }, 500);
 }
 
 fileInput.addEventListener("change",loadImage);
