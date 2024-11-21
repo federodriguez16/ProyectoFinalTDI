@@ -116,9 +116,6 @@ def upload_file():
             # Movemos la imagen del sector de procesamiento para que el usuario pueda descargarla
             os.rename(f"static/processing/{nombre}",
                       f"static/downloads/{nombre}")
-            print(ayuda)
-            print(categoria)
-            print(counts)
 
             try:
                 os.remove(f"static/downloads/{id-1}-objetos.csv")
